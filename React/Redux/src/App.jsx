@@ -9,15 +9,13 @@ import About from "./Components/About";
 const App = () => {
   return (
     <BrowserRouter>
-      <nav className="navbar bg-dark navbar-expand-lg py-3 px-3">
+      <nav className="navbar navbar-dark bg-dark navbar-expand-lg px-3">
         <div className="container-fluid">
-          <div className="nav-brand">
-            <NavLink to="/">
-              <h1>LOGO</h1>
-            </NavLink>
-          </div>
+          <NavLink className="navbar-brand" to="/">
+            LOGO
+          </NavLink>
           <div className="navbar-nav">
-            <NavLink to="home">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
             <NavLink to="users">Users</NavLink>
             <NavLink to="about">About</NavLink>
             <NavLink to="contact">Contact</NavLink>
