@@ -1,16 +1,40 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUsers } from "../slices/UserSlice";
 
 const Home = () => {
-  const { name, age, email, contact, address } = useState();
+  const dispatch = useDispatch();
+  const [formInput, setFormInput] = useState({
+    name: "",
+    age: "",
+    email: "",
+    contact: "",
+    address: "",
+  });
 
-  const handleSubmit = () => {};
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormInput((currInput) => {
+      return {
+        ...currInput,
+        [name]: value,
+      };
+    });
+  };
+
+  const addUsers = (event) => {
+    event.preventDefault();
+    dispatch(setUsers(formInput));
+  };
+
   return (
     <>
       <div className="container">
         <div className="my-5 form-container w-50 p-4 shadow rounded">
           <h3 className="text-center">User Registration Form</h3>
-          <form onSubmit={handleSubmit}>
+          <form className="w-100">
             <div className="form-group">
               <label className="form-lable" htmlFor="name">
                 Name
@@ -20,7 +44,8 @@ const Home = () => {
                 type="text"
                 name="name"
                 id="name"
-                value={name}
+                value={formInput.name}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -32,7 +57,8 @@ const Home = () => {
                 type="text"
                 name="age"
                 id="age"
-                value={age}
+                value={formInput.age}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -44,7 +70,8 @@ const Home = () => {
                 type="text"
                 name="email"
                 id="email"
-                value={email}
+                value={formInput.email}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -56,7 +83,8 @@ const Home = () => {
                 type="text"
                 name="contact"
                 id="contact"
-                value={contact}
+                value={formInput.contact}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -67,15 +95,17 @@ const Home = () => {
                 className="form-control"
                 name="address"
                 id="address"
-                value={address}
+                value={formInput.address}
+                onChange={handleChange}
               ></textarea>
             </div>
-            <div className="form-group mt-4 d-flex justify-content-center align-items-center gap-3">
-              <button type="submit" className="btn btn-sm btn-success">
+            <div className="form-group mt-4 d-flex justify-content-center align-items-center">
+              <button
+                type="submit"
+                onClick={addUsers}
+                className="btn btn-sm btn-success"
+              >
                 Submit
-              </button>
-              <button type="submit" className="btn btn-sm btn-danger">
-                Clear
               </button>
             </div>
           </form>

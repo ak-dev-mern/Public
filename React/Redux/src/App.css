@@ -46,7 +46,7 @@ nav .navbar-nav a.active {
 }
 
 .form-group {
-  width: 400px;
+  width: auto;
   margin: 10px 0px;
 }
 .form-group .form-lable {
@@ -54,5 +54,5 @@ nav .navbar-nav a.active {
 }
 
 .form-group button {
-  width: 130px;
+  width: 150px;
 }
