@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUsers } from "../slices/UserSlice";
+import Popup from "./Popup";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Home = () => {
     address: "",
   });
   const [errors, setErrors] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,11 +26,26 @@ const Home = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formInput.name) newErrors.name = "Name is required";
-    if (!formInput.age || isNaN(formInput.age))
-      newErrors.age = "Age must be a number";
+    if (!formInput.age || isNaN(formInput.age) || formInput.age.length > 2) {
+      newErrors.age = isNaN(formInput.age)
+        ? "Age must be a number"
+        : "Please enter valid age";
+    }
     if (!formInput.email || !/\S+@\S+\.\S+/.test(formInput.email))
       newErrors.email = "Email is invalid";
-    if (!formInput.contact) newErrors.contact = "Contact is required";
+    if (
+      !formInput.contact ||
+      isNaN(formInput.contact) ||
+      formInput.contact.length !== 10
+    ) {
+      if (!formInput.contact) {
+        newErrors.contact = "Contact is required";
+      } else if (isNaN(formInput.contact)) {
+        newErrors.contact = "Contact must be a number";
+      } else if (formInput.contact.length !== 10) {
+        newErrors.contact = "Phone number must be 10 digits only";
+      }
+    }
     if (!formInput.address) newErrors.address = "Address is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -46,6 +63,10 @@ const Home = () => {
         address: "",
       });
       setErrors({});
+      setShowPopup(true); // Show the popup
+      setTimeout(() => {
+        setShowPopup(false); // Hide the popup after 3 seconds
+      }, 3000);
     }
   };
 
@@ -59,7 +80,7 @@ const Home = () => {
               Name
             </label>
             <input
-              className="form-control"
+              className={`form-control ${errors.name ? "border-danger" : ""}`}
               type="text"
               name="name"
               id="name"
@@ -73,7 +94,7 @@ const Home = () => {
               Age
             </label>
             <input
-              className="form-control"
+              className={`form-control ${errors.age ? "border-danger" : ""}`}
               type="text"
               name="age"
               id="age"
@@ -87,7 +108,7 @@ const Home = () => {
               Email
             </label>
             <input
-              className="form-control"
+              className={`form-control ${errors.email ? "border-danger" : ""}`}
               type="text"
               name="email"
               id="email"
@@ -103,7 +124,9 @@ const Home = () => {
               Contact
             </label>
             <input
-              className="form-control"
+              className={`form-control ${
+                errors.contact ? "border-danger" : ""
+              }`}
               type="text"
               name="contact"
               id="contact"
@@ -119,7 +142,9 @@ const Home = () => {
               Address
             </label>
             <textarea
-              className="form-control"
+              className={`form-control ${
+                errors.address ? "border-danger" : ""
+              }`}
               name="address"
               id="address"
               value={formInput.address}
@@ -136,6 +161,8 @@ const Home = () => {
           </div>
         </form>
       </div>
+
+      {showPopup && <Popup />}
     </div>
   );
 };
