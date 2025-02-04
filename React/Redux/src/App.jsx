@@ -10,7 +10,7 @@ import Popup from "./Components/Popup";
 const App = () => {
   return (
     <BrowserRouter>
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg px-3">
+      <nav className="navbar navbar-dark bg-dark navbar-expand-lg px-3 sticky-top">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
             LOGO
