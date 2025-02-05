@@ -18,7 +18,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid px-5 mt-1 z-1">
-          <NavLink to="/" className="navbar-brand">
+          <NavLink to="/images" className="navbar-brand">
             <svg
               width="120"
               height="50"
@@ -243,24 +243,16 @@ const Navbar = () => {
       <nav className="main-navbar">
         <ul className="d-flex justify-content-center align-items-center">
           <li>
-            <NavLink to="/images" >
-              Home
-            </NavLink>
+            <NavLink to="/images">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/videos" >
-              Videos
-            </NavLink>
+            <NavLink to="/videos">Videos</NavLink>
           </li>
           <li>
-            <NavLink to="/leaderboard" >
-              Leaderboard
-            </NavLink>
+            <NavLink to="/leaderboard">Leaderboard</NavLink>
           </li>
           <li>
-            <NavLink to="/challenges" >
-              Challenges
-            </NavLink>
+            <NavLink to="/challenges">Challenges</NavLink>
           </li>
         </ul>
       </nav>
