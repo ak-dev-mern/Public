@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import headerImg from "../assets/images/bg.jpeg";
+import langImg from "../assets/images/lang.SVG";
 
 const Navbar = () => {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [optionOpen, setOptionOpen] = useState(false);
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top">
       <div className="container-fluid px-5 mt-1 z-1">
         <NavLink to="/" className="navbar-brand">
           <svg
-            width="85"
-            height="38"
+            width="120"
+            height="50"
             class="Icon_color-whiteFFFFFF__qY7ST spacing_noMargin__F5u9R spacing_omr50__lktke spacing_dmr30__rqEuC spacing_mmr15__ntge_ spacing_tmr15__EyVWJ"
             viewBox="0 0 512 227"
           >
@@ -26,32 +28,32 @@ const Navbar = () => {
             onMouseLeave={() => setExploreOpen(false)}
           >
             <NavLink to="/explore" className="nav-link  text-light">
-              Explore
+              Explore <i class="bi bi-chevron-down"></i>
             </NavLink>
             <ul className={`dropdown-menu  ${exploreOpen ? "show" : ""}`}>
               <li>
                 <NavLink to="/discover-photos" className="dropdown-item">
-                  Discover Photos
+                  <i class="bi bi-globe-americas"></i> Discover Photos
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/leaderboard" className="dropdown-item">
-                  Leaderboard
+                  <i class="bi bi-rocket-takeoff"></i> Leaderboard
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/challenges" className="dropdown-item">
-                  Challenges
+                  <i class="bi bi-award"></i> Challenges
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/free-videos" className="dropdown-item">
-                  Free Videos
+                  <i class="bi bi-play-circle"></i> Free Videos
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/blog" className="dropdown-item">
-                  Pixels Blog
+                  <i class="bi bi-wallet"></i> Pixels Blog
                 </NavLink>
               </li>
             </ul>
@@ -109,6 +111,39 @@ const Navbar = () => {
                   Imprint & Terms
                 </NavLink>
               </li>
+              <li className="dropdown-divider"></li>
+              <NavLink to="/language" className="dropdown-item">
+                <img className="img-fluid lang" src={langImg} alt="Language" />{" "}
+                Change Language
+              </NavLink>
+              <li className="dropdown-divider"></li>
+              <ul className="navbar-nav social d-flex justify-content-between align-items-center px-2 fs-5">
+                <li>
+                  <NavLink className="nav-item">
+                    <i class="bi bi-instagram"></i>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-item">
+                    <i class="bi bi-threads"></i>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-item">
+                    <i class="bi bi-pinterest"></i>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-item">
+                    <i class="bi bi-youtube"></i>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="nav-ittem">
+                    <i class="bi bi-tiktok"></i>
+                  </NavLink>
+                </li>
+              </ul>
             </ul>
           </li>
           <li className="nav-item">
@@ -119,19 +154,49 @@ const Navbar = () => {
       <div className="header">
         <img className="img-fluid header-img" src={headerImg} alt="Header" />
         <div className="search-box">
-          <h3 className="text-light text-center fw-bold">
+          <h3 className="text-light text-center fw-semibold">
             The best free stock photos, royalty free images & videos shared by
             creators.
           </h3>
-          <div className="input-box my-4 d-flex justify-content-center align-items-center gap-3">
-            <NavLink className="nav-link">Photos</NavLink>
-            <input
-              className="form-control border-0"
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Search for free photos"
-            />
+          <div className="input-box my-4 gap-1 d-flex justify-content-start align-items-center">
+            <div className="choice-btn">
+              <ul className="navbar-nav toggle-btn px-1">
+                <li
+                  className="nav-item dropdown"
+                  onMouseEnter={() => setOptionOpen(true)}
+                  onMouseLeave={() => setOptionOpen(false)}
+                >
+                  <NavLink className="nav-link rounded d-flex justify-content-center align-items-center gap-2">
+                    <i class="bi bi-card-image"></i> Photos
+                    <i class="bi bi-chevron-down"></i>
+                  </NavLink>
+
+                  <ul className={`dropdown-menu  ${optionOpen ? "show" : ""}`}>
+                    <li>
+                      <NavLink to="/images" className="dropdown-item">
+                        <i class="bi bi-card-image"></i> Photos
+                      </NavLink>
+                      <NavLink to="/videos" className="dropdown-item">
+                        <i class="bi bi-play-circle"></i> Videos
+                      </NavLink>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div className="w-75">
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Search for free photos"
+              />
+            </div>
+            <div className="btn-search">
+              <button>
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>

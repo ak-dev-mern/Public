@@ -1,11 +1,6 @@
 {
   "posts": [
     {
-      "title": "Introduction to Fullstack Development",
-      "body": "Exploring the roles of frontend and backend in web applications.",
-      "id": "1"
-    },
-    {
       "id": "2",
       "title": "Getting Started with HTML and CSS",
       "body": "The foundation of web development for beginners."
