@@ -16,9 +16,8 @@ nav {
   position: relative;
 }
 
-nav .navbar-brand h3 {
-  font-family: var(--style);
-  font-weight: bold;
+nav .navbar-brand {
+  fill: #ffff;
 }
 
 .navbar-nav li {
@@ -39,3 +38,17 @@ nav .navbar-brand h3 {
   height: 100%;
   object-fit: cover;
 }
+
+.search-box {
+  width: 40%;
+  height: 100vh;
+  position: absolute;
+  top: 70%;
+  left: 30%;
+}
+.input-box{
+  background-color: #ffff;
+  padding: 10px;
+  border-radius: 10px;
+}
+

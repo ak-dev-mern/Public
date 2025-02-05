@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top">
-      <div className="container-fluid px-5 mt-1">
+      <div className="container-fluid px-5 mt-1 z-1">
         <NavLink to="/" className="navbar-brand">
           <svg
             width="85"
@@ -25,7 +25,7 @@ const Navbar = () => {
             onMouseEnter={() => setExploreOpen(true)}
             onMouseLeave={() => setExploreOpen(false)}
           >
-            <NavLink to="/explore" className="nav-link">
+            <NavLink to="/explore" className="nav-link  text-light">
               Explore
             </NavLink>
             <ul className={`dropdown-menu  ${exploreOpen ? "show" : ""}`}>
@@ -57,7 +57,7 @@ const Navbar = () => {
             </ul>
           </li>
           <li className="nav-item">
-            <NavLink to="/licence" className="nav-link">
+            <NavLink to="/licence" className="nav-link  text-light">
               Licence
             </NavLink>
           </li>
@@ -66,7 +66,7 @@ const Navbar = () => {
             onMouseEnter={() => setMoreOpen(true)}
             onMouseLeave={() => setMoreOpen(false)}
           >
-            <NavLink to="/more" className="nav-link">
+            <NavLink to="/more" className="nav-link  text-light">
               ...
             </NavLink>
             <ul
@@ -118,6 +118,22 @@ const Navbar = () => {
       </div>
       <div className="header">
         <img className="img-fluid header-img" src={headerImg} alt="Header" />
+        <div className="search-box">
+          <h3 className="text-light text-center fw-bold">
+            The best free stock photos, royalty free images & videos shared by
+            creators.
+          </h3>
+          <div className="input-box my-4 d-flex justify-content-center align-items-center gap-3">
+            <NavLink className="nav-link">Photos</NavLink>
+            <input
+              className="form-control border-0"
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search for free photos"
+            />
+          </div>
+        </div>
       </div>
     </nav>
   );
