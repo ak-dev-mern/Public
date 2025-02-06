@@ -8,6 +8,7 @@ const Navbar = () => {
   const [moreOpen, setMoreOpen] = useState(false);
   const [optionOpen, setOptionOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Photos");
+  const [query, setQuery] = useState("");
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -229,6 +230,8 @@ const Navbar = () => {
                   name="search"
                   id="search"
                   placeholder="Search for free photos"
+                  onChange={(e) => setQuery(e.target.value)}
+                  value={query}
                 />
               </div>
               <div className="btn-search">

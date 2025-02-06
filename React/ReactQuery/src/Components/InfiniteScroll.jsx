@@ -53,8 +53,8 @@ const InfiniteScroll = () => {
 
   return (
     <>
-          <div className="container">
-              <h3>React Query Infinite Scroll</h3>
+      <div className="container">
+        <h3>React Query Infinite Scroll</h3>
         <ul>
           {data?.pages?.map((page) =>
             page?.data.map((item) => (

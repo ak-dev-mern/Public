@@ -16,8 +16,10 @@
     "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-intersection-observer": "^9.15.1",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "react-spinner": "^0.2.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
