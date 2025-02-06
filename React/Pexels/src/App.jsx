@@ -10,7 +10,7 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/images" element={<Images/> } />
+        <Route path="/" element={<Images/> } />
         <Route path="/videos" element={<Videos/> } />
       </Routes>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
@@ -16,16 +16,14 @@ const fetchImages = async () => {
     const response = await axios.get(apiUrl, {
       headers: {
         Authorization: `Bearer ${apiKey}`,
-        "X-Ratelimit-Limit": 100,
-        "X-Ratelimit-Remaining": 99,
       },
     });
 
-    if (!response.data?.photos?.length) {
+    if (!response.data.photos) {
       throw new Error("No images found. Please try again later.");
     }
 
-    return response.data.photos[0];
+    return response.data.photos;
   } catch (error) {
     console.error("Fetch error:", error);
     throw new Error(
@@ -64,19 +62,26 @@ const Images = () => {
     );
 
   return (
-    <div className="container-fluid px-5 my-5">
-      <h2>Image from Pexels</h2>
-      {data?.src?.medium ? (
-        <div className="text-center">
-          <img
-            src={data.src.medium}
-            alt={data.photographer || "Unknown"}
-            className="img-fluid rounded shadow-sm"
-          />
-          <p className="mt-2">Photographer: {data.photographer || "Unknown"}</p>
+    <div className=" container-fluid px-5 my-5">
+      {data && data.length > 0 ? (
+        <div className="gallery-container">
+          {data.map((image) => (
+            <div key={image.id} className="text-center mb-4 gallery-item ">
+              <img
+                src={image.src?.portrait}
+                alt={image.photographer || "Unknown"}
+                className="gallery-image rounded shadow-sm"
+              />
+              <div className="image-info">
+                <p className="photographer-name">
+                  Photographer: {image.photographer || "Unknown"}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       ) : (
-        <div className="alert alert-warning">No image data available</div>
+        <div className="alert alert-warning">No images available</div>
       )}
     </div>
   );

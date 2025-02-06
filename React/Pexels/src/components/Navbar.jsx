@@ -18,7 +18,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid px-5 mt-1 z-1">
-          <NavLink to="/images" className="navbar-brand">
+          <NavLink to="/" className="navbar-brand">
             <svg
               width="120"
               height="50"
@@ -204,7 +204,7 @@ const Navbar = () => {
                       <li>
                         <NavLink
                           onClick={() => handleOptionClick("Photos")}
-                          to="/images"
+                          to="/"
                           className="dropdown-item"
                         >
                           <i className="bi bi-card-image"></i> Photos
@@ -243,7 +243,7 @@ const Navbar = () => {
       <nav className="main-navbar">
         <ul className="d-flex justify-content-center align-items-center">
           <li>
-            <NavLink to="/images">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
             <NavLink to="/videos">Videos</NavLink>
