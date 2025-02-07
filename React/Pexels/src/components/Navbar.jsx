@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import headerImg from "../assets/images/bg.jpeg";
 import langImg from "../assets/images/lang.SVG";
+import { useState } from "react";
 
 const Navbar = () => {
   const [exploreOpen, setExploreOpen] = useState(false);
@@ -30,7 +30,6 @@ const Navbar = () => {
             </svg>
           </NavLink>
           <ul className="navbar-nav">
-            {/* Explore Dropdown */}
             <li
               className="nav-item dropdown"
               onMouseEnter={() => setExploreOpen(true)}
@@ -205,7 +204,7 @@ const Navbar = () => {
                       <li>
                         <NavLink
                           onClick={() => handleOptionClick("Photos")}
-                          to="/"
+                          to="/images"
                           className="dropdown-item"
                         >
                           <i className="bi bi-card-image"></i> Photos
@@ -243,31 +242,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <nav className="main-navbar">
-        <ul className="d-flex justify-content-center align-items-center">
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/videos">Videos</NavLink>
-          </li>
-          <li>
-            <NavLink to="/leaderboard">Leaderboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/challenges">Challenges</NavLink>
-          </li>
-        </ul>
-      </nav>
-      <div className="sub-header d-flex justify-content-between align-items-center px-5 mt-5">
-        <h4>Free Stock Photos</h4>
-        <div>
-          <select className="form-select" name="trending" id="trending">
-            <option value="Trending">Trending</option>
-            <option value="New">New</option>
-          </select>
-        </div>
-      </div>
     </>
   );
 };
