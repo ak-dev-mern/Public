@@ -204,7 +204,7 @@ const Navbar = () => {
                       <li>
                         <NavLink
                           onClick={() => handleOptionClick("Photos")}
-                          to="/images"
+                          to="/"
                           className="dropdown-item"
                         >
                           <i className="bi bi-card-image"></i> Photos
