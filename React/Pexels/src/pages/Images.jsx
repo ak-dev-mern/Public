@@ -74,19 +74,18 @@ const Images = () => {
                   className="gallery-item col"
                   ref={isLastImage ? ref : null}
                 >
-                  <div className="card shadow-sm">
-                    <div className="card-top-icon d-flex gap-3">
-                      <div>
-                        <button className="btn btn-sm">
-                          <i class="bi bi-bookmark fs-5 text-light"></i>
-                        </button>
-                      </div>
-                      <div>
-                        <button className="btn btn-sm">
-                          <i class="bi bi-heart fs-5 text-light"></i>
-                        </button>
-                      </div>
+                  <div className="card shadow-sm position-relative">
+                    {/* Card Top Icons */}
+                    <div className="card-top-icon position-absolute top-0 end-0 p-2 d-flex gap-2 opacity-0 transition-opacity">
+                      <button className="btn btn-sm">
+                        <i className="bi bi-bookmark fs-5 text-light"></i>
+                      </button>
+                      <button className="btn btn-sm">
+                        <i className="bi bi-heart fs-5 text-light"></i>
+                      </button>
                     </div>
+
+                    {/* Image */}
                     <img
                       src={photo.src.large}
                       alt={photo.alt}
@@ -97,27 +96,28 @@ const Images = () => {
                         objectFit: "cover",
                       }}
                     />
-                    <div className="card-body image-info d-flex aliign-items-center justify-content-between">
-                      <div className="rounded rounded-5 d-flex aliign-items-center justify-content-strat gap-3">
-                        <div>
-                          <img
-                            className="random-avatar"
-                            src="https://avatar.iran.liara.run/public"
-                          />
-                        </div>
 
-                        <p className="card-text photographer-name mt-3">
-                          <a
-                            href={photo.photographer_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-decoration-none text-light"
-                          >
-                            {photo.photographer}
-                          </a>
-                        </p>
-                      </div>
-                      <div>
+                    {/* Photographer Details and Download Button */}
+                    <div className="card-body image-info position-absolute bottom-0 start-0 w-100 p-3 bg-dark bg-opacity-75 opacity-0 transition-opacity">
+                      <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center gap-3">
+                          <img
+                            className="random-avatar rounded-circle"
+                            src="https://avatar.iran.liara.run/public"
+                            alt="Avatar"
+                            style={{ width: "40px", height: "40px" }}
+                          />
+                          <p className="card-text photographer-name mb-0">
+                            <a
+                              href={photo.photographer_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-decoration-none text-light"
+                            >
+                              {photo.photographer}
+                            </a>
+                          </p>
+                        </div>
                         <button className="btn btn-success">Download</button>
                       </div>
                     </div>

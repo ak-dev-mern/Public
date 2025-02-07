@@ -213,3 +213,14 @@ nav .navbar-brand {
   border-radius: 10px;
 }
 
+/* Hover effect for card */
+.card:hover .card-top-icon,
+.card:hover .image-info {
+  opacity: 2;
+}
+
+/* Transition for smooth hover effect */
+.card-top-icon,
+.image-info {
+  transition: opacity 0.3s ease-in-out;
+}
