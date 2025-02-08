@@ -35,7 +35,7 @@ const SignUp = () => {
                     More than 3 million free photos and videos to bring your
                     ideas to life.
                   </p>
-                  <div className="mt-3 d-flex justify-content-center align-items-center gap-3 btn-group">
+                  <div className="mt-4 d-flex justify-content-center align-items-center gap-3 btn-group">
                     <button className="btn btn-transparent border btn-google">
                       <img src={google} alt="Google Logo" />
                       <span className="ps-2">Sign up with Google</span>
@@ -59,14 +59,14 @@ const SignUp = () => {
                       placeholder="First name"
                     />
                     <input
-                      className="form-control mt-4"
+                      className="form-control mt-3"
                       type="email"
                       name="email"
                       id="email"
                       placeholder="Email"
                     />
                     <input
-                      className="form-control mt-4"
+                      className="form-control mt-3"
                       type="password"
                       name="password"
                       id="password"
