@@ -37,7 +37,9 @@ nav .navbar-brand {
 .header {
   position: absolute;
   width: 100%;
-  height: 900px;
+  height: 500px;
+  top: 0;
+  left: 0;
 }
 
 .header-img {
@@ -56,13 +58,24 @@ nav .navbar-brand {
 }
 
 .search-box {
-  width: 40%;
+  width: 100%;
   height: 100vh;
   position: absolute;
-  top: 70%;
+  top: 60%;
   left: 30%;
 }
+
+.search-box .heading {
+  position: absolute;
+  top: -10%;
+  left: 0%;
+  width: 100%;
+}
+.search-box h3 {
+  width: 40%;
+}
 .input-box {
+  width: 40%;
   background-color: #ffff;
   padding: 8px 0px;
   border-radius: 10px;
@@ -274,12 +287,4 @@ nav .navbar-brand {
 
 .spinners .spinner-grow:nth-child(5) {
   animation-delay: 1.2s;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
 }
