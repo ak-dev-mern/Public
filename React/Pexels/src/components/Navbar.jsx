@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import headerImg from "../assets/images/bg.jpeg";
 import langImg from "../assets/images/lang.SVG";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Navbar = ({ onButtonClick }) => {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [optionOpen, setOptionOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Photos");
+  const [selectedOption, setSelectedOption] = useState("photos");
   const [inputValue, setInputValue] = useState("");
 
   const handleOptionClick = (option) => {
@@ -22,7 +22,7 @@ const Navbar = ({ onButtonClick }) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg sticky-top">
+      <nav className="navbar navbar-expand-lg">
         <div className="container-fluid px-5 mt-1 z-1">
           <NavLink to="/" className="navbar-brand">
             <svg
