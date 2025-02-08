@@ -1,23 +1,48 @@
 import { NavLink } from "react-router-dom";
 import headerImg from "../assets/images/bg.jpeg";
 import langImg from "../assets/images/lang.SVG";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ({ onButtonClick }) => {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [optionOpen, setOptionOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Photos");
-  const [query, setQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setOptionOpen(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onButtonClick(inputValue);
+  };
+
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    // Handle scroll event
+    const handleScroll = () => {
+      if (window.pageYOffset > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+      // Add scroll event listener
+      window.addEventListener("scroll", handleScroll);
+
+      // Cleanup the event listener on component unmount
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    };
+  });
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg">
+      <nav className={`navbar navbar-expand-lg pixed ${isSticky ? "sticky" : ""}`}>
         <div className="container-fluid px-5 mt-1 z-1">
           <NavLink to="/" className="navbar-brand">
             <svg
@@ -223,21 +248,23 @@ const Navbar = () => {
                   </li>
                 </ul>
               </div>
-              <div>
-                <input
-                  type="text"
-                  name="search"
-                  id="search"
-                  placeholder="Search for free photos"
-                  onChange={(e) => setQuery(e.target.value)}
-                  value={query}
-                />
-              </div>
-              <div className="btn-search">
-                <button>
-                  <i className="bi bi-search"></i>
-                </button>
-              </div>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="Search for free photos"
+                    onChange={(e) => setInputValue(e.target.value)}
+                    value={inputValue}
+                  />
+                </div>
+                <div className="btn-search">
+                  <button type="submit">
+                    <i className="bi bi-search"></i>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

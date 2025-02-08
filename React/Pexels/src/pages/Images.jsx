@@ -2,11 +2,12 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Header from "../components/Header";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 
-const fetchImages = async ({ pageParam = 1 }) => {
+const fetchImages = async ({ pageParam = 1 }, endpoint) => {
   const apiKey = import.meta.env.VITE_API_KEY;
-  const apiUrl = import.meta.env.VITE_API_IMAGE_URL;
+  const apiUrl = `${import.meta.env.VITE_API_IMAGE_URL}${endpoint}`;
 
   if (!apiKey || !apiUrl) {
     throw new Error("API credentials are missing...");
@@ -14,13 +15,23 @@ const fetchImages = async ({ pageParam = 1 }) => {
 
   const response = await axios.get(apiUrl, {
     headers: { Authorization: apiKey },
-    params: { query: "nature", per_page: 6, page: pageParam },
+    params: { per_page: 6, page: pageParam },
   });
 
   return response.data;
 };
 
 const Images = () => {
+  const [endpoint, setEndpoint] = useState("curated");
+
+  const toggleEndpoint = (inputValue) => {
+    if (inputValue === "") {
+      setEndpoint("curated");
+    } else {
+      setEndpoint(`search?query=${inputValue} `);
+    }
+  };
+
   const {
     data,
     isLoading,
@@ -30,8 +41,8 @@ const Images = () => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["images"],
-    queryFn: fetchImages,
+    queryKey: ["images", endpoint],
+    queryFn: ({ pageParam }) => fetchImages({ pageParam }, endpoint),
     getNextPageParam: (lastPage) => {
       if (!lastPage?.next_page) return undefined;
       const url = new URL(lastPage.next_page);
@@ -49,11 +60,26 @@ const Images = () => {
 
   return (
     <>
+      <Navbar onButtonClick={toggleEndpoint} />;
       <Header />
       {isLoading && (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
+        <div className="d-flex justify-content-center align-items-start mt-3 gap-4 spinners vh-100">
+          <div className="d-flex justify-content-center gap-4 my-5 spinners">
+            <div className="spinner-grow text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-secondary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-success" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-danger" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         </div>
       )}
@@ -63,7 +89,10 @@ const Images = () => {
         </div>
       )}
       <div className="container mt-4">
-        <div className="gallery-container g-4 row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {/* <button onClick={toggleEndpoint} className="btn btn-secondary mb-4">
+          Toggle Endpoint
+        </button> */}
+        <div className="gallery-container row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 m-0">
           {data?.pages.map((page, i) =>
             page.photos?.map((photo, index) => {
               const isLastImage =
@@ -71,16 +100,16 @@ const Images = () => {
               return (
                 <div
                   key={photo.id}
-                  className="gallery-item col"
+                  className="gallery-item p-3 g-1"
                   ref={isLastImage ? ref : null}
                 >
-                  <div className="card shadow-sm position-relative">
+                  <div className="card position-relative">
                     {/* Card Top Icons */}
                     <div className="card-top-icon position-absolute top-0 end-0 p-2 d-flex gap-2 opacity-0 transition-opacity">
-                      <button className="btn btn-sm">
+                      <button className="btn btn-sm" aria-label="Bookmark">
                         <i className="bi bi-bookmark fs-5 text-light"></i>
                       </button>
-                      <button className="btn btn-sm">
+                      <button className="btn btn-sm" aria-label="Like">
                         <i className="bi bi-heart fs-5 text-light"></i>
                       </button>
                     </div>
@@ -98,21 +127,20 @@ const Images = () => {
                     />
 
                     {/* Photographer Details and Download Button */}
-                    <div className="card-body image-info position-absolute bottom-0 start-0 w-100 p-3 bg-dark bg-opacity-75 opacity-0 transition-opacity">
+                    <div className="image-info position-absolute bottom-0 start-0 w-100 p-3 opacity-0 transition-opacity">
                       <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center gap-3">
+                        <div className="d-flex align-items-center justify-content-start gap-2 w-100">
                           <img
                             className="random-avatar rounded-circle"
                             src="https://avatar.iran.liara.run/public"
                             alt="Avatar"
-                            style={{ width: "40px", height: "40px" }}
                           />
                           <p className="card-text photographer-name mb-0">
                             <a
                               href={photo.photographer_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-decoration-none text-light"
+                              className="text-decoration-none text-light fw-semi-bold"
                             >
                               {photo.photographer}
                             </a>
@@ -121,6 +149,7 @@ const Images = () => {
                         <button className="btn btn-success">Download</button>
                       </div>
                     </div>
+                    <div className="card-overlay"></div>
                   </div>
                 </div>
               );
@@ -128,9 +157,21 @@ const Images = () => {
           )}
         </div>
         {isFetchingNextPage && (
-          <div className="d-flex justify-content-center my-4">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading more images...</span>
+          <div className="d-flex justify-content-center gap-4 my-5 spinners">
+            <div className="spinner-grow text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-secondary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-success" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-danger" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <div className="spinner-grow text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div>
         )}

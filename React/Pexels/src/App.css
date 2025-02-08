@@ -168,15 +168,15 @@ nav .navbar-brand {
 
 .gallery-item {
   position: relative;
-  overflow: hidden;
+  overflow: hidden !important;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-image {
   width: 100%;
   height: auto;
-  display: block;
+  object-fit: cover !important;
+  overflow: hidden !important;
 }
 
 .image-info {
@@ -184,7 +184,6 @@ nav .navbar-brand {
   bottom: 0;
   left: 0;
   right: 0;
-  /* background: rgba(0, 0, 0, 0.7); */
   color: white;
   text-align: center;
 }
@@ -196,11 +195,25 @@ nav .navbar-brand {
 
 .card {
   transition: transform 0.2s ease-in-out;
+  position: relative;
+}
+
+.card-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+}
+.card:hover .card-overlay {
+  background-color: #00000037 !important;
 }
 
 .random-avatar {
   width: 50px;
   height: 50px;
+  object-fit: cover;
 }
 .card-top-icon {
   position: absolute;
@@ -209,18 +222,64 @@ nav .navbar-brand {
 }
 
 .card-top-icon button:hover {
-  background-color: #01010169;
+  background-color: #01010195;
   border-radius: 10px;
 }
 
-/* Hover effect for card */
 .card:hover .card-top-icon,
 .card:hover .image-info {
-  opacity: 2;
+  opacity: 1 !important;
+  z-index: 10;
 }
 
-/* Transition for smooth hover effect */
 .card-top-icon,
 .image-info {
   transition: opacity 0.3s ease-in-out;
+}
+
+.card-text a:hover {
+  color: #ccc !important;
+}
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.spinners ~ .spinner-grow {
+  animation: spinner-grow 1.5s ease-in-out linear infinite;
+  display: inline-block;
+}
+
+.spinners .spinner-grow:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.spinners .spinner-grow:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.spinners .spinner-grow:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.spinners .spinner-grow:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+.spinners .spinner-grow:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
