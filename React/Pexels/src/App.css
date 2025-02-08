@@ -182,14 +182,13 @@ nav .navbar-brand {
 .gallery-item {
   position: relative;
   overflow: hidden;
- 
 }
 
 .gallery-image {
   width: 100%;
   height: auto;
   overflow: hidden;
-   border-radius: 15px;
+  border-radius: 15px;
 }
 
 .image-info {
@@ -292,4 +291,70 @@ nav .navbar-brand {
 
 .spinners .spinner-grow:nth-child(5) {
   animation-delay: 1.2s;
+}
+.modal-backdrop {
+  background-color: rgb(0, 0, 0) !important; /* Example: Red with 70% opacity */
+}
+
+.modal-content {
+  width: 600px;
+}
+.modal .btn-google {
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px !important;
+}
+.modal .btn-google img {
+  width: 20px;
+  height: 20px;
+}
+
+.modal .btn-google:hover {
+  background-color: #cccccc7f;
+  border: 1px solid #000 !important;
+}
+
+.modal .btn-apple,
+.modal .btn-fb {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px !important;
+}
+
+.modal .btn-apple:hover {
+  background-color: #000;
+}
+.modal .btn-fb:hover {
+  background-color: #3a5ed5;
+}
+.modal .btn-apple:hover i {
+  color: #fff;
+}
+
+.modal .btn-fb:hover i {
+  color: #fff !important;
+}
+
+.modal form .form-group {
+  margin-bottom: 25px;
+}
+
+.modal form input {
+  height: 45px !important;
+}
+
+.modal .btn-signUp {
+  background-color: #5ae2a2;
+  height: 45px;
+  border-radius: 10px;
+}
+.modal .footer p {
+  font-size: 14px;
+}
+
+.modal .footer p a {
+  text-underline-position: under;
+}
+.modal .footer p a:hover {
+  color: #000 !important;
 }

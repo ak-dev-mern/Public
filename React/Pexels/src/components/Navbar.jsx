@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import headerImg from "../assets/images/bg.jpeg";
 import langImg from "../assets/images/lang.SVG";
 import { useState } from "react";
@@ -168,7 +168,16 @@ const Navbar = ({ onButtonClick }) => {
 
             {/* Join Button */}
             <li className="nav-item">
-              <button className="btn btn-light">Join</button>
+              <Link>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  className="btn btn-light"
+                >
+                  Join
+                </button>
+              </Link>
             </li>
           </ul>
         </div>
