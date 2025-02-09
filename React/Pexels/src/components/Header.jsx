@@ -3,15 +3,15 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <nav className="main-navbar w-100">
+      <nav className="navbar main-navbar w-100 d-flex justify-content-center aligin-items-center">
         <ul className="d-flex justify-content-center align-items-center">
           <li className="nav-item">
-            <NavLink to="/" className="nav-link" activeClassName="active">
+            <NavLink to="/" className="nav-link">
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/videos" className="nav-link" activeClassName="active">
+            <NavLink to="/videos" className="nav-link" >
               Videos
             </NavLink>
           </li>
@@ -36,7 +36,7 @@ const Header = () => {
         </ul>
       </nav>
 
-      <div className="sub-header d-flex justify-content-between align-items-center px-5 mt-5">
+      <div className="sub-header d-flex justify-content-between align-items-center px-5 mt-0">
         <h4>Free Stock Photos</h4>
         <div>
           <select className="form-select" name="trending" id="trending">
