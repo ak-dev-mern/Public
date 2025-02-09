@@ -16,7 +16,6 @@
 body {
   width: 100%;
   height: 100vh;
-  overflow-x: hidden;
 }
 
 nav {
@@ -31,6 +30,10 @@ nav .navbar-brand {
 .navbar-nav li {
   padding: 0 20px;
   font-weight: 500;
+}
+
+.navbar-nav li .dropdown-menu li a:hover {
+  background-color: lightgreen;
 }
 
 .navbar-nav .dropdown-menu li {
@@ -63,12 +66,21 @@ nav .navbar-brand {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.serach-box-container {
+  width: 40%;
+  height: 300px;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}
+
 .search-box {
   width: 100%;
-  height: 100vh;
+  height: 300px;
   position: absolute;
-  top: 60%;
-  left: 30%;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .search-box .heading {
@@ -78,10 +90,12 @@ nav .navbar-brand {
   width: 100%;
 }
 .search-box h3 {
-  width: 40%;
+  width: 100%;
+  margin-top: -20px;
+  font-size: 30px;
 }
 .input-box {
-  width: 40%;
+  width: 100%;
   background-color: #ffff;
   padding: 8px 0px;
   border-radius: 10px;
@@ -364,4 +378,71 @@ nav .navbar-brand {
 }
 .modal .footer p a:hover {
   color: #000 !important;
+}
+
+.img-details-modal .modal-content {
+  width: 1250px;
+}
+
+.img-details-modal a {
+  text-decoration: none;
+  color: #000;
+}
+
+.img-details-modal .modal-btn-group button {
+  border: 1px solid #cccccc50 !important;
+  padding: 8px;
+  width: 120px;
+}
+
+.img-details-modal .modal-btn-group button:hover {
+  border: 1px solid #a5a4a4 !important;
+  background-color: #cccccc53;
+}
+
+.canva {
+  width: 20px;
+  height: 20px;
+}
+.btn-download {
+  background-color: rgb(11, 202, 11);
+  width: 200px !important;
+}
+.btn-download:hover {
+  background-color: rgb(11, 141, 11) !important;
+}
+
+.btn-close {
+  width: 30px !important;
+}
+
+.btn-canva {
+  width: 170px !important;
+}
+
+.img-details-modal .modal-img-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-details-modal .modal-body img {
+  width: 400px;
+  height: 580px;
+}
+
+.img-details-modal .dropdown-menu {
+  width: 260px;
+  padding: 15px;
+}
+
+.img-details-modal .dropdown-menu li {
+  margin-top: 15px;
+}
+
+.img-details-modal .dropdown-menu button{
+  width: 100% !important;
+  margin-top: 20px;
 }

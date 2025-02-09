@@ -103,7 +103,7 @@ const Videos = () => {
                   className="gallery-item p-3 g-1"
                   ref={isLastImage ? ref : null}
                 >
-                  <Link to={video.url}>
+                  <Link to={`/videodetails/${video.id}`}>
                     <div className="card position-relative">
                       {/* Card Top Icons */}
                       <div className="card-top-icon p-2 d-flex justify-content-between w-100 opacity-0 transition-opacity">

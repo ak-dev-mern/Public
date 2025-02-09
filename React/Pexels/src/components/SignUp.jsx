@@ -15,7 +15,7 @@ const SignUp = () => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog ">
           <div className="modal-content">
             <div className="modal-header border-0">
               <button

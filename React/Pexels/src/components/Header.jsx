@@ -11,7 +11,7 @@ const Header = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/videos" className="nav-link" >
+            <NavLink to="/videos" className="nav-link">
               Videos
             </NavLink>
           </li>
@@ -39,7 +39,7 @@ const Header = () => {
       <div className="sub-header d-flex justify-content-between align-items-center px-5 mt-0">
         <h4>Free Stock Photos</h4>
         <div>
-          <select className="form-select" name="trending" id="trending">
+          <select className="form-select" name="category" id="category">
             <option value="Trending">Trending</option>
             <option value="New">New</option>
           </select>

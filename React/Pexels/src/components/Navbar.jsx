@@ -192,76 +192,78 @@ const Navbar = ({ onButtonClick }) => {
       <div className="header">
         <img className="img-fluid header-img" src={headerImg} alt="Header" />
         <div className="overlay"></div>
-        <div className="search-box">
-          <div className="heading">
-            <h3 className="text-light text-center fw-semibold">
-              The best free stock photos, royalty-free images & videos shared by
-              creators.
-            </h3>
-          </div>
-          <div className="input-box my-4 d-flex gap-1">
-            <div className="choice-btn">
-              <ul className="navbar-nav toggle-btn px-1">
-                <li
-                  className="nav-item dropdown"
-                  onMouseEnter={() => setOptionOpen(true)}
-                  onMouseLeave={() => setOptionOpen(false)}
-                >
-                  <NavLink className="nav-link rounded d-flex align-items-center gap-3">
-                    <i
-                      className={`bi ${
-                        selectedOption === "Photos"
-                          ? "bi-card-image"
-                          : "bi-play-circle"
-                      }`}
-                    ></i>
-                    {selectedOption}
-                    <i
-                      className={`bi ${
-                        optionOpen ? "bi-chevron-up" : "bi-chevron-down"
-                      }`}
-                    ></i>
-                  </NavLink>
-                  <ul className={`dropdown-menu ${optionOpen ? "show" : ""}`}>
-                    <li>
-                      <NavLink
-                        onClick={() => handleOptionClick("Photos")}
-                        to="/"
-                        className="dropdown-item"
-                      >
-                        <i className="bi bi-card-image"></i> Photos
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        onClick={() => handleOptionClick("Videos")}
-                        to="/videos"
-                        className="dropdown-item"
-                      >
-                        <i className="bi bi-play-circle"></i> Videos
-                      </NavLink>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+        <div className="serach-box-container">
+          <div className="search-box">
+            <div className="heading">
+              <h3 className="text-light text-center fw-semibold">
+                The best free stock photos, royalty-free images & videos shared
+                by creators.
+              </h3>
             </div>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <input
-                  type="text"
-                  name="search"
-                  id="search"
-                  placeholder="Search for free photos"
-                  onChange={(e) => setInputValue(e.target.value)}
-                  value={inputValue}
-                />
+            <div className="input-box my-5 d-flex gap-1">
+              <div className="choice-btn">
+                <ul className="navbar-nav toggle-btn px-1">
+                  <li
+                    className="nav-item dropdown"
+                    onMouseEnter={() => setOptionOpen(true)}
+                    onMouseLeave={() => setOptionOpen(false)}
+                  >
+                    <NavLink className="nav-link rounded d-flex align-items-center gap-3">
+                      <i
+                        className={`bi ${
+                          selectedOption === "Photos"
+                            ? "bi-card-image"
+                            : "bi-play-circle"
+                        }`}
+                      ></i>
+                      {selectedOption}
+                      <i
+                        className={`bi ${
+                          optionOpen ? "bi-chevron-up" : "bi-chevron-down"
+                        }`}
+                      ></i>
+                    </NavLink>
+                    <ul className={`dropdown-menu ${optionOpen ? "show" : ""}`}>
+                      <li>
+                        <NavLink
+                          onClick={() => handleOptionClick("Photos")}
+                          to="/"
+                          className="dropdown-item"
+                        >
+                          <i className="bi bi-card-image"></i> Photos
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          onClick={() => handleOptionClick("Videos")}
+                          to="/videos"
+                          className="dropdown-item"
+                        >
+                          <i className="bi bi-play-circle"></i> Videos
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
-              <div className="btn-search">
-                <button type="submit">
-                  <i className="bi bi-search"></i>
-                </button>
-              </div>
-            </form>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="Search for free photos"
+                    onChange={(e) => setInputValue(e.target.value)}
+                    value={inputValue}
+                  />
+                </div>
+                <div className="btn-search">
+                  <button type="submit">
+                    <i className="bi bi-search"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
