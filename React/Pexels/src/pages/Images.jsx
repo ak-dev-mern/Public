@@ -233,7 +233,10 @@ const Images = () => {
                         </button>
                         <ul className="dropdown-menu dropdown-menu-end  dropdown-menu-light">
                           <li>
-                            <a className="dropdown-item text-secondary" href="#">
+                            <a
+                              className="dropdown-item text-secondary"
+                              href="#"
+                            >
                               Choose a size:
                             </a>
                           </li>
@@ -325,7 +328,7 @@ const Images = () => {
         )}
 
         {isFetchingNextPage && (
-          <div className="d-flex justify-content-center gap-4 my-5 spinners">
+          <div className="d-flex justify-content-center gap-4 mt-3 my-5 spinners">
             <div className="spinner-grow text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>

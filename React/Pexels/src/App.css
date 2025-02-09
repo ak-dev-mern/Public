@@ -242,6 +242,7 @@ nav .navbar-brand {
 }
 .card:hover .card-overlay {
   background-color: #00000037 !important;
+  cursor: pointer;
 }
 
 .random-avatar {
@@ -433,6 +434,10 @@ nav .navbar-brand {
   height: 580px;
 }
 
+.img-details-modal .modal-body video {
+  width: auto;
+  height: 580px;
+}
 .img-details-modal .dropdown-menu {
   width: 260px;
   padding: 15px;
