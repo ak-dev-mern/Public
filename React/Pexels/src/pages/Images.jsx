@@ -64,22 +64,24 @@ const Images = () => {
       <Navbar onButtonClick={toggleEndpoint} />;
       <Header />
       {isLoading && (
-        <div className="d-flex justify-content-center align-items-start mt-3 gap-4 spinners vh-100">
-          <div className="d-flex justify-content-center gap-4 my-5 spinners">
-            <div className="spinner-grow text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <div className="spinner-grow text-secondary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <div className="spinner-grow text-success" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <div className="spinner-grow text-danger" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <div className="spinner-grow text-warning" role="status">
-              <span className="visually-hidden">Loading...</span>
+        <div className="container-fluid w-100">
+          <div className="d-flex justify-content-center align-items-start mt-3 gap-4 spinners vh-100">
+            <div className="d-flex justify-content-center gap-4 my-5 spinners">
+              <div className="spinner-grow text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-secondary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-success" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-danger" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <div className="spinner-grow text-warning" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
             </div>
           </div>
         </div>
@@ -89,8 +91,8 @@ const Images = () => {
           <div className="alert alert-danger">Error: {error.message}</div>
         </div>
       )}
-      <div className="container-fluid mt-4">
-        <div className="gallery-container row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 m-0">
+      <div className="container-fluid mt-4 w-100">
+        <div className=" row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 m-0">
           {data?.pages.map((page, i) =>
             page.photos?.map((photo, index) => {
               const isLastImage =

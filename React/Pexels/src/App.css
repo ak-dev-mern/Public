@@ -13,6 +13,12 @@
   --style: "Style Script", cursive;
 }
 
+body {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
 nav {
   position: relative;
   width: 100%;
@@ -108,7 +114,8 @@ nav .navbar-brand {
   width: 25px;
 }
 .choice-btn {
-  width: 130px;
+  width: 160px !important;
+  position: relative;
 }
 .choce-btn:hover {
   background: #ccc;
@@ -150,7 +157,11 @@ nav .navbar-brand {
 
 .choice-btn .dropdown-menu {
   margin-left: -10px;
-  width: 70px !important;
+  width: 50px !important;
+  position: absolute;
+  top: 45px;
+  left: 5px;
+  z-index: 1000;
 }
 
 .main-navbar {
@@ -173,10 +184,6 @@ nav .navbar-brand {
   padding: 10px 15px;
   color: #fff;
   border-radius: 50px;
-}
-
-.gallery-container {
-  margin-top: 20px;
 }
 
 .gallery-item {
