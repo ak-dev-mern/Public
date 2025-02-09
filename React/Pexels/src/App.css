@@ -321,6 +321,10 @@ nav .navbar-brand {
 .modal-content {
   width: 600px;
 }
+
+.signup-modal{
+  background-color: rgba(0, 0, 0, 0.7);
+}
 .modal .btn-google {
   width: 300px;
   padding: 10px;
@@ -385,6 +389,10 @@ nav .navbar-brand {
   width: 1250px;
 }
 
+.img-details-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .img-details-modal a {
   text-decoration: none;
   color: #000;
@@ -447,7 +455,7 @@ nav .navbar-brand {
   margin-top: 15px;
 }
 
-.img-details-modal .dropdown-menu button{
+.img-details-modal .dropdown-menu button {
   width: 100% !important;
   margin-top: 20px;
 }

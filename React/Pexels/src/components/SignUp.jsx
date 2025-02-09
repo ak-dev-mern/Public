@@ -8,7 +8,7 @@ const SignUp = () => {
   return (
     <>
       <div
-        className="modal fade custom-modal"
+        className="modal fade signup-modal"
         data-bs-keyboard="false"
         id="exampleModal"
         tabIndex="-1"

@@ -180,6 +180,7 @@ const Images = () => {
             aria-labelledby="imageModalLabel"
             aria-hidden={!showModal}
             data-bs-keyboard="true"
+            data-bs-backdrop="static"
           >
             <div className="modal-dialog modal-xl">
               <div className="modal-content p-3">
