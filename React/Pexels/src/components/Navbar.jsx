@@ -12,7 +12,6 @@ const Navbar = ({ onButtonClick }) => {
   const [inputValue, setInputValue] = useState("");
   const [fix, setFix] = useState(false);
 
-  // 🟢 Update the button dynamically based on the page
   useEffect(() => {
     if (location.pathname === "/videos") {
       setSelectedOption("Videos");
@@ -42,11 +41,11 @@ const Navbar = ({ onButtonClick }) => {
   useEffect(() => {
     window.addEventListener("scroll", setFixed);
 
-    // Clean up the event listener when the component unmounts
+
     return () => {
       window.removeEventListener("scroll", setFixed);
     };
-  }, []); // Empty array ensures this effect runs once when the component mounts
+  }, []);
 
   return (
     <>
