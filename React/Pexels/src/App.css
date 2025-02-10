@@ -25,7 +25,6 @@ nav {
 
 .navbar.fixed {
   background-color: #ffff !important;
-  z-index: 1000;
 }
 
 .navbar.fixed li a {
@@ -36,17 +35,20 @@ nav {
   fill: #000;
 }
 .navbar.fixed .serach-box-container {
-  top: -160%;
+  top: 0%;
   left: 15%;
   width: 800px;
+  height: 80px;
 }
 
 .navbar.fixed .serach-box-container .input-box {
   background-color: #cccccc2c;
+  top: 15%;
 }
 .navbar.fixed .serach-box-container .input-box input {
   background-color: transparent;
   padding-left: 10px;
+  width: 550px;
 }
 .navbar.fixed .serach-box-container .input-box .choice-btn {
   background-color: #fff;
