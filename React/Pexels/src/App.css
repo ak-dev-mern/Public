@@ -406,6 +406,9 @@ nav .navbar-brand {
   height: 45px;
   border-radius: 10px;
 }
+.modal .btn-signUp:hover{
+   background-color: #0ab967;
+}
 .modal .footer p {
   font-size: 14px;
 }

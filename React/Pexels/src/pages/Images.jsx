@@ -27,6 +27,7 @@ const Images = () => {
   const [endpoint, setEndpoint] = useState("curated");
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [scrollPage, setScrollPage] = useState(false);
 
   const toggleEndpoint = (inputValue) => {
     if (inputValue === "") {
@@ -65,11 +66,15 @@ const Images = () => {
   const handleOpenModal = (image) => {
     setSelectedImage(image);
     setShowModal(true);
+    setScrollPage(false);
+    document.body.style.overflow = "hidden";
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedImage(null);
+    setScrollPage(true);
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -104,7 +109,13 @@ const Images = () => {
           <div className="alert alert-danger">Error: {error.message}</div>
         </div>
       )}
-      <div className="container-fluid mt-4 w-100">
+      <div
+        className={
+          scrollPage
+            ? "hidden  container-fluid w-100 mt-4"
+            : "container-fluid w-100 mt-4 "
+        }
+      >
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 m-0">
           {data?.pages.map((page, i) =>
             page.photos?.map((photo, index) => {
@@ -172,7 +183,7 @@ const Images = () => {
 
         {selectedImage && (
           <div
-            className={`modal fade ${
+            className={`modal fade  ${
               showModal ? "show" : ""
             } img-details-modal `}
             tabIndex="-1"
@@ -319,7 +330,7 @@ const Images = () => {
                     <img
                       src={selectedImage.src.original}
                       alt={selectedImage.alt}
-                      className="img-fluid"
+                      className="img-fluid object-fit-cover"
                     />
                   </div>
                 </div>
