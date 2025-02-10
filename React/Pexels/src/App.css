@@ -235,7 +235,7 @@ nav .navbar-brand {
 .gallery-item {
   position: relative;
   overflow: hidden;
-  padding: 12px;
+  padding: 10px;
 }
 
 .gallery-image {
@@ -306,7 +306,7 @@ nav .navbar-brand {
 }
 
 .play-button {
-  margin-left: 20px;
+  margin-right: 300px;
 }
 
 .card-text a:hover {

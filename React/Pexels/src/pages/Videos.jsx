@@ -27,6 +27,7 @@ const Videos = () => {
   const [endpoint, setEndpoint] = useState("popular");
   const [showModal, setShowModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [scrollPage, setScrollPage] = useState(false);
 
   const toggleEndpoint = (inputValue) => {
     if (inputValue === "") {
@@ -67,11 +68,15 @@ const Videos = () => {
   const handleOpenModal = (video) => {
     setSelectedVideo(video);
     setShowModal(true);
+    setScrollPage(false);
+    document.body.style.overflow = "hidden";
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedVideo(null);
+    setScrollPage(true);
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -115,12 +120,12 @@ const Videos = () => {
               return (
                 <div
                   key={video.id}
-                  className="gallery-item g-1"
+                  className="gallery-item"
                   ref={isLastVideo ? ref : null}
                   onClick={() => handleOpenModal(video)}
                 >
                   <div className="card position-relative">
-                    <div className="card-top-icon p-2 d-flex justify-content-between w-100">
+                    <div className="card-top-icon p-2 d-flex justify-content-between align-items-center opacity-0 transition-opacity">
                       <div className="play-button">
                         <button className="btn btn-sm" aria-label="Play">
                           <i className="bi bi-play-circle fs-5 text-light"></i>
