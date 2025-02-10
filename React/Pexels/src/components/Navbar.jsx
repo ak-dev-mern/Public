@@ -1,7 +1,8 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import headerImg from "../assets/images/bg.jpeg";
 import langImg from "../assets/images/lang.SVG";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
+import Language from "./Language";
 
 const Navbar = ({ onButtonClick }) => {
   const location = useLocation();
@@ -122,7 +123,7 @@ const Navbar = ({ onButtonClick }) => {
                       <input
                         type="text"
                         name="search"
-                        id="search"
+                        id="search1"
                         placeholder="Search for free photos"
                         onChange={(e) => setInputValue(e.target.value)}
                         value={inputValue}
@@ -200,12 +201,16 @@ const Navbar = ({ onButtonClick }) => {
               onMouseEnter={() => setMoreOpen(true)}
               onMouseLeave={() => setMoreOpen(false)}
             >
-              <NavLink to="/more" className="nav-link text-light">
-                ...
-              </NavLink>
+              <NavLink className="nav-link text-light">...</NavLink>
               <ul className={`dropdown-menu ${moreOpen ? "show" : ""}`}>
                 <li>
-                  <NavLink to="/login" className="dropdown-item">
+                  <NavLink
+                    to="/login"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    className="dropdown-item"
+                  >
                     Login
                   </NavLink>
                 </li>
@@ -241,20 +246,22 @@ const Navbar = ({ onButtonClick }) => {
                 </li>
 
                 <li className="dropdown-divider"></li>
-                <NavLink
-                  to="/language"
-                  className="dropdown-item"
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#language"
-                >
-                  <img
-                    className="img-fluid lang"
-                    src={langImg}
-                    alt="Language"
-                  />{" "}
-                  Change Language
-                </NavLink>
+
+                <li>
+                  <button
+                    className="dropdown-item bg-transparent text-dark"
+                    data-bs-toggle="modal"
+                    data-bs-target="#language"
+                  >
+                    <img
+                      className="img-fluid lang"
+                      src={langImg}
+                      alt="Language"
+                    />
+                    <span className="ms-2">Change Language</span>
+                  </button>
+                </li>
+
                 <li className="dropdown-divider"></li>
 
                 {/* Social Media Links */}
@@ -371,7 +378,7 @@ const Navbar = ({ onButtonClick }) => {
                   <input
                     type="text"
                     name="search"
-                    id="search"
+                    id="search2"
                     placeholder="Search for free photos"
                     onChange={(e) => setInputValue(e.target.value)}
                     value={inputValue}
@@ -387,6 +394,7 @@ const Navbar = ({ onButtonClick }) => {
           </div>
         </div>
       </div>
+      <Language />
     </>
   );
 };

@@ -111,7 +111,13 @@ const Videos = () => {
           <div className="alert alert-danger">Error: {error.message}</div>
         </div>
       )}
-      <div className="container-fluid mt-4 w-100">
+      <div
+        className={
+          scrollPage
+            ? "hidden  container-fluid w-100 mt-4"
+            : "container-fluid w-100 mt-4 "
+        }
+      >
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 m-0">
           {data?.pages.map((page, i) =>
             page.videos?.map((video, index) => {

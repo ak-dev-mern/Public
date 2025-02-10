@@ -143,7 +143,8 @@ nav .navbar-brand {
   border: none;
 }
 
-.input-box #search:focus {
+.input-box #search1:focus,
+.input-box #search2:focus {
   outline: none !important;
 }
 
@@ -407,8 +408,8 @@ nav .navbar-brand {
   height: 45px;
   border-radius: 10px;
 }
-.modal .btn-signUp:hover{
-   background-color: #0ab967;
+.modal .btn-signUp:hover {
+  background-color: #0ab967;
 }
 .modal .footer p {
   font-size: 14px;
