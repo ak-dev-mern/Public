@@ -23,6 +23,36 @@ nav {
   width: 100%;
 }
 
+.navbar.fixed {
+  background-color: #ffff !important;
+  z-index: 1000;
+}
+
+.navbar.fixed li a {
+  color: #000 !important;
+}
+
+.navbar.fixed svg {
+  fill: #000;
+}
+.navbar.fixed .serach-box-container {
+  top: -160%;
+  left: 15%;
+  width: 800px;
+}
+
+.navbar.fixed .serach-box-container .input-box {
+  background-color: #cccccc2c;
+}
+.navbar.fixed .serach-box-container .input-box input {
+  background-color: transparent;
+  padding-left: 10px;
+}
+.navbar.fixed .serach-box-container .input-box .choice-btn {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-left: 5px;
+}
 nav .navbar-brand {
   fill: #ffff;
 }
@@ -322,7 +352,7 @@ nav .navbar-brand {
   width: 600px;
 }
 
-.signup-modal{
+.signup-modal {
   background-color: rgba(0, 0, 0, 0.7);
 }
 .modal .btn-google {
