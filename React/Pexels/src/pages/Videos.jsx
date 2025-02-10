@@ -115,7 +115,7 @@ const Videos = () => {
               return (
                 <div
                   key={video.id}
-                  className="gallery-item p-3 g-1"
+                  className="gallery-item g-1"
                   ref={isLastVideo ? ref : null}
                   onClick={() => handleOpenModal(video)}
                 >

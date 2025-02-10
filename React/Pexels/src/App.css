@@ -235,6 +235,7 @@ nav .navbar-brand {
 .gallery-item {
   position: relative;
   overflow: hidden;
+  padding: 12px;
 }
 
 .gallery-image {

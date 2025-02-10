@@ -124,7 +124,7 @@ const Images = () => {
               return (
                 <div
                   key={photo.id}
-                  className="gallery-item p-3 g-1"
+                  className="gallery-item  g-1"
                   ref={isLastImage ? ref : null}
                 >
                   <div
