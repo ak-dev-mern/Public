@@ -164,7 +164,7 @@ const Videos = () => {
                               href={video.user.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-decoration-none text-light fw-semi-bold"
+                              className="text-decoration-none text-light fw-bold"
                             >
                               {video.user.name}
                             </a>

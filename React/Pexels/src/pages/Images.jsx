@@ -164,7 +164,7 @@ const Images = () => {
                               href={photo.photographer_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-decoration-none text-light fw-semi-bold"
+                              className="text-decoration-none text-light fw-bold"
                             >
                               {photo.photographer}
                             </a>

@@ -241,7 +241,13 @@ const Navbar = ({ onButtonClick }) => {
                 </li>
 
                 <li className="dropdown-divider"></li>
-                <NavLink to="/language" className="dropdown-item">
+                <NavLink
+                  to="/language"
+                  className="dropdown-item"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#language"
+                >
                   <img
                     className="img-fluid lang"
                     src={langImg}
