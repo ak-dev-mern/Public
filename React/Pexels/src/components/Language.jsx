@@ -1,43 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import React from "react";
-
-const fetchCountry = async () => {
-  const apiKey = import.meta.env.VITE_COUNTRY_API_KEY; // Ensure this is your token
-  const apiUrl = "https://aaapis.com/api/v1/info/country/"; // API endpoint
-
-  if (!apiKey || !apiUrl) {
-    throw new Error("API credentials are missing...");
-  }
-
-  const response = await axios.post(
-    apiUrl,
-    { country: "fr" }, // Payload with country code
-    {
-      headers: {
-        Authorization: `Token ${apiKey}`, // Authorization header
-        "Content-Type": "application/json", // Content-Type header
-      },
-    }
-  );
-
-  return response.data; // Return the fetched data
-};
+import { popularCountries } from "../utils/countryList";
 
 const Language = () => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["country"],
-    queryFn: fetchCountry,
-  });
-
-  if (isLoading) {
-    return <h3>Please wait while loading data...</h3>;
-  }
-
-  if (isError) {
-    return <h3>Error: {error.message}</h3>;
-  }
-
   return (
     <>
       <div
@@ -49,10 +13,7 @@ const Language = () => {
       >
         <div className="modal-dialog">
           <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="languageLabel">
-                Change Language
-              </h1>
+            <div className="modal-header border-0">
               <button
                 type="button"
                 className="btn-close"
@@ -60,36 +21,30 @@ const Language = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
-              {data ? (
-                <>
-                  <p>Country: {data.name}</p>
-                  <p>Flag: {data.flag}</p>
-                  <p>Country Code: {data.country_code}</p>
-                  <p>Language: {data.language.join(", ")}</p>
-                  <p>
-                    Currency: {data.currency.name} ({data.currency.symbol})
-                  </p>
-                </>
-              ) : (
-                <p>No data available</p>
-              )}
-            </div>
-            <img
-              src="https://countryflagsapi.netlify.app/flag/India.svg"
-              alt=""
-            />
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
+            <div className="modal-body px-5">
+              <h1 className="modal-title fs-5" id="languageLabel">
+                Choose your language:
+              </h1>
+
+              <div className="country-list mt-3 d-flex justify-content-center flex-wrap gap-2">
+                {popularCountries.map((country) => (
+                  <button key={country.Code} className="btn btn-transparent">
+                    <div className="country-item d-flex align-items-center mb-3 px-3">
+                      <div>
+                        <img
+                          src={`https://countryflagsapi.netlify.app/flag/${country.Code}.svg`}
+                          alt={`Flag of ${country.Country_Name}`}
+                          className="img-fluid me-2 rounded rounded-5"
+                          style={{ width: 30, height: 30 }}
+                        />
+                      </div>
+                      <div>
+                        <small>{country.Language}</small>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

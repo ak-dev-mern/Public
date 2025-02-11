@@ -496,3 +496,16 @@ nav .navbar-brand {
   width: 100% !important;
   margin-top: 20px;
 }
+
+.country-list button {
+  width: auto;
+  height: 45px;
+  text-align: center;
+  border-radius: 50px;
+  border-color: #cccccc90;
+  padding: 5px 5px;
+}
+
+.country-list button:hover{
+  background-color: #cccc;
+}
