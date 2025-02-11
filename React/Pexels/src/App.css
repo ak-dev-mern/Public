@@ -236,7 +236,19 @@ nav .navbar-brand {
 .gallery-item {
   position: relative;
   overflow: hidden;
-  padding: 10px;
+  height: 100%;
+  width: auto;
+}
+
+.gallery-container {
+  column-count: 4;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
 }
 
 .gallery-image {
@@ -264,6 +276,7 @@ nav .navbar-brand {
   transition: transform 0.2s ease-in-out;
   position: relative;
   border-radius: 15px;
+  width: auto;
 }
 
 .card-overlay {
@@ -475,13 +488,15 @@ nav .navbar-brand {
 }
 
 .img-details-modal .modal-body img {
-  width: 400px;
+  width: auto;
   height: 580px;
+  object-fit: cover;
 }
 
 .img-details-modal .modal-body video {
   width: auto;
   height: 580px;
+  object-fit: cover;
 }
 .img-details-modal .dropdown-menu {
   width: 260px;
@@ -506,6 +521,6 @@ nav .navbar-brand {
   padding: 5px 5px;
 }
 
-.country-list button:hover{
+.country-list button:hover {
   background-color: #cccc;
 }

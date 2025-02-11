@@ -112,11 +112,11 @@ const Images = () => {
       <div
         className={
           scrollPage
-            ? "hidden  container-fluid w-100 mt-4"
-            : "container-fluid w-100 mt-4 "
+            ? "hidden  container-fluid px-4 mt-4"
+            : "container-fluid px-4 mt-4 "
         }
       >
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 m-0">
+        <div className="gallery-container m-0">
           {data?.pages.map((page, i) =>
             page.photos?.map((photo, index) => {
               const isLastImage =
@@ -144,11 +144,6 @@ const Images = () => {
                       src={photo.src.large}
                       alt={photo.alt}
                       className="gallery-image"
-                      style={{
-                        height: "650px",
-                        width: "100%",
-                        objectFit: "cover",
-                      }}
                     />
 
                     <div className="image-info position-absolute bottom-0 start-0 w-100 p-3 opacity-0 transition-opacity">
