@@ -27,7 +27,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 0 20px;
   background-color: rgb(121, 150, 157);
   position: sticky;
   top: 0;
@@ -42,7 +42,7 @@ nav .navbar-nav {
   align-items: center;
 }
 nav .navbar-nav li {
-  padding: 5px 10px;
+  padding: 15px 10px;
   font-weight: 600;
   transition: 0.3s ease;
 }
@@ -50,7 +50,7 @@ nav .navbar-nav li a {
   color: #fff;
 }
 nav .navbar-nav li:hover a {
-  color: #efebeb;
+  color: #bfff00;
 }
 
 /* Navbar dropdown*/
@@ -76,8 +76,8 @@ nav .dropdown-menu .dropdown-menu-items {
   height: fit-content;
   border-radius: 8px;
   position: absolute;
-  top: 70px;
-  right: 10px;
+  top: 55px;
+  right: 20px;
   padding: 5px 0;
   visibility: hidden;
   opacity: 0;
@@ -159,17 +159,18 @@ nav button:hover {
 .card {
   width: 400px;
   height: 450px;
-  border-radius: 10px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px #ccc;
 }
 .card h3 {
   font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 17px;
 }
 .card-img {
   width: 400px;
   height: 280px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   overflow: hidden;
 }
 .card img {
@@ -178,8 +179,45 @@ nav button:hover {
   object-fit: cover;
 }
 
+.card-body {
+  height: 60px;
+}
+
+.card-body,
+.card-footer,
+.card-header {
+  padding: 5px 10px;
+}
+
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 15px;
+}
+
+.card-footer p {
+  font-size: 13px;
+  color: #6c0606;
+}
+
+.card-footer .author {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+    color: #6c0606;
+}
+
+.card button {
+  background-color: rgb(121, 150, 157);
+  border: 0;
+  padding: 3px 8px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.card button:hover {
+  color: #bfff00;
 }

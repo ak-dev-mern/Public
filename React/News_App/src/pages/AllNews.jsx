@@ -2,6 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import React, { useRef, useCallback } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import placeholder from "../asset/images/placeholder.jpg";
 
 const fetchAllNews = async ({ pageParam = 1 }) => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -68,23 +69,28 @@ const AllNews = () => {
                 <div className="card">
                   <div className="card-img">
                     <img
-                      src={article.urlToImage || "placeholder.jpg"}
+                      src={article.urlToImage || placeholder}
                       alt={article.title || "News image"}
                       onError={(e) => {
-                        e.target.src = "placeholder.jpg"; // Fallback image
+                        e.target.src = { placeholder }; // Fallback image
                       }}
                     />
                   </div>
-                  <h3 title={article.title}>
-                    {handleTextLimit(article.title, 30)}
-                  </h3>
+                  <div className="card-header">
+                    <h3 title={article.title}>
+                      {handleTextLimit(article.title, 50)}
+                    </h3>
+                  </div>
                   <div className="card-body">
                     <p className="description">
-                      {handleTextLimit(article.description, 150)}
+                      {handleTextLimit(article.description, 100)}
                     </p>
                   </div>
                   <div className="card-footer">
-                    <p>{article.author || "Unknown Author"}</p>
+                    <div className="author">
+                      <i class="bi bi-person-fill"></i>
+                      <p>{article.author || "Unknown Author"}</p>
+                    </div>
                     <Link
                       to={article.url}
                       target="_blank"
