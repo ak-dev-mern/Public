@@ -19,9 +19,6 @@ const Navbar = () => {
               <NavLink to="/">All News</NavLink>
             </li>
             <li>
-              <NavLink to="/breakingNews">Breaking News</NavLink>
-            </li>
-            <li>
               <NavLink to="/topHeadlines">Top Headlines</NavLink>
             </li>
           </ul>

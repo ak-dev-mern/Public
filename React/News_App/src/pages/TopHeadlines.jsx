@@ -69,11 +69,11 @@ const TopHeadlines = () => {
   );
 
   if (isLoading && !data) {
-    return <p>Please wait, data is loading...</p>;
+    return <p className="no-data-found">Please wait, data is loading...</p>;
   }
 
   if (isError) {
-    return <p>Error: {error.message}</p>;
+    return <p className="no-data-found">Error: {error.message}</p>;
   }
 
   return (
@@ -158,8 +158,7 @@ const TopHeadlines = () => {
                       </p>
                     </div>
                     <Link
-                      to={article.url}
-                      target="_blank"
+                      to={`/newsdetails/${article.source?.id || article.title}`}
                       rel="noopener noreferrer"
                     >
                       <button>Read more</button>

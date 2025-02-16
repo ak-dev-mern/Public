@@ -191,3 +191,33 @@ select {
 .card button:hover {
   color: #bfff00;
 }
+
+/* News Details*/
+.news-detail-container .card {
+  margin: 30px auto;
+  width: 70%;
+  height: fit-content;
+}
+
+.news-detail-container .card .card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-detail-container .card .card-body {
+  width: 100%;
+  height: fit-content;
+}
+.news-detail-container .card .card-body p {
+  margin-bottom: 30px;
+}
+
+/* No data*/
+.no-data-found {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
