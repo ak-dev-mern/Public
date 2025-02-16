@@ -15,7 +15,6 @@ const fetchAllNews = async ({ queryKey }) => {
   if (!apiKey) {
     throw new Error("API Credential is missing");
   }
-
   try {
     const response = await axios.get(baseUrl);
     return response.data;

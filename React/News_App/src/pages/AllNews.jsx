@@ -3,7 +3,6 @@ import React, { useRef, useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import placeholder from "../asset/images/placeholder.jpg";
-import { debounce } from "lodash";
 
 const fetchAllNews = async ({ pageParam = 1, queryKey }) => {
   const [, endpoint] = queryKey;
@@ -28,24 +27,13 @@ const AllNews = () => {
   const [endpoint, setEndpoint] = useState("bitcoin");
   const [inputValue, setInputValue] = useState("");
 
-  // Debounced search function
-  const debouncedSearch = useCallback(
-    debounce((value) => {
-      setEndpoint(value.trim() || "bitcoin");
-    }, 500),
-    []
-  );
-
-  // Effect to trigger debounced search on input change
-  useEffect(() => {
-    if (inputValue) {
-      debouncedSearch(inputValue);
-    }
-  }, [inputValue, debouncedSearch]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEndpoint(inputValue.trim() || "bitcoin");
+    if (inputValue) {
+      setEndpoint(inputValue.trim());
+    } else {
+      setEndpoint("bitcoin");
+    }
   };
 
   const { data, isLoading, isError, error, fetchNextPage, hasNextPage } =
@@ -95,6 +83,7 @@ const AllNews = () => {
               placeholder="Search news"
               onChange={(e) => setInputValue(e.target.value)}
               value={inputValue}
+              autoComplete="off"
             />
             <button type="submit">Search</button>
           </form>
