@@ -18,8 +18,8 @@ ul li {
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 /* Navbar style*/
@@ -83,7 +83,6 @@ nav .dropdown-menu .dropdown-menu-items {
   opacity: 0;
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
   z-index: 1000;
-  pointer-events: auto;
 }
 
 nav .navbar-nav li:hover .dropdown-menu-items {
@@ -103,51 +102,80 @@ nav .dropdown-menu .dropdown-menu-items li a {
   padding: 5px 8px;
   color: #fff;
 }
+nav .dropdown-menu .dropdown-menu-items li a:hover {
+  color: #bfff00;
+}
 
 nav .dropdown-menu .dropdown-menu-items li:hover a {
-  background-color: white;
-  color: #000;
   font-size: 15px;
   font-weight: bold;
 }
 
-/* Navbar Serach*/
+/*Serach*/
 
-nav input {
+input {
   width: 300px;
   height: 35px;
   border-radius: 5px;
-  border: none;
+  border: 1px solid #ccc;
   padding: 0 10px;
 }
 
-nav input:focus {
+input:focus {
   outline: none;
 }
 
-nav button {
+button {
   padding: 7px 10px;
   border: none;
   border-radius: 5px;
   margin-left: 10px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: #bfff00;
   font-weight: 600;
 }
 
-nav button:hover {
+button:hover {
   background-color: #ccc;
+}
+
+label {
+  padding: 0 5px;
+  font-weight: bold;
+}
+select {
+  width: 50px;
+  height: 25px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  outline: none;
 }
 
 /* Container style*/
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
+
+.container-header {
+  margin-top: 20px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: sticky;
+  top: 51.5px;
+  background-color: #fff;
+  z-index: 1;
+}
+
 .news-gallery-container {
   margin: 30px auto;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   max-width: 1300px;
   display: flex;
   justify-content: center;
@@ -160,7 +188,7 @@ nav button:hover {
   width: 400px;
   height: 450px;
   border-radius: 20px;
-  box-shadow: 5px 5px 15px #ccc;
+  box-shadow: 5px 5px 15px #9b9999;
 }
 .card h3 {
   font-weight: bold;
@@ -206,7 +234,7 @@ nav button:hover {
   justify-content: start;
   align-items: center;
   gap: 5px;
-    color: #6c0606;
+  color: #6c0606;
 }
 
 .card button {

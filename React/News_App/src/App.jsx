@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import "../src/App.css";
 import AllNews from "./pages/AllNews";
 import BreakingNews from "./pages/BreakingNews";
 import TopHeadlines from "./pages/TopHeadlines";
 import Categories from "./pages/Categories";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (

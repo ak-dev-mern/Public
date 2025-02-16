@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -12,17 +12,7 @@ const Navbar = () => {
             </NavLink>
           </h2>
         </div>
-        <div>
-          <form>
-            <input
-              type="search"
-              id="search"
-              name="search"
-              placeholder="Serach news"
-            />
-            <button type="submit">Serach</button>
-          </form>
-        </div>
+
         <div>
           <ul className="navbar-nav">
             <li>

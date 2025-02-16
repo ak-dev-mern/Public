@@ -1,14 +1,15 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import placeholder from "../asset/images/placeholder.jpg";
 
-const fetchAllNews = async ({ pageParam = 1 }) => {
+const fetchAllNews = async ({ pageParam = 1, queryKey }) => {
+  const [, endpoint] = queryKey;
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = `${
     import.meta.env.VITE_API_URL
-  }everything?q=bitcoin&page=${pageParam}&apiKey=${apiKey}`;
+  }everything?q=${endpoint}&page=${pageParam}&apiKey=${apiKey}`;
 
   if (!apiKey) {
     throw new Error("API Credential is missing");
@@ -23,9 +24,21 @@ const handleTextLimit = (text, limit) => {
 };
 
 const AllNews = () => {
+  const [endpoint, setEndpoint] = useState("bitcoin");
+  const [inputValue, setInputValue] = useState();
+
+  const toggleEndpoint = (inputValue) => {
+    setEndpoint(inputValue.trim() || "bitcoin");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toggleEndpoint(inputValue);
+  };
+
   const { data, isLoading, isError, error, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["articles"],
+      queryKey: ["articles", endpoint],
       queryFn: fetchAllNews,
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.articles.length ? allPages.length + 1 : undefined;
@@ -58,6 +71,25 @@ const AllNews = () => {
   return (
     <>
       <div className="container">
+        <div className="container-header">
+          <div>
+            <h3>Result for "{endpoint}"</h3>
+          </div>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="search"
+                id="search"
+                name="search"
+                placeholder="Serach news"
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+              />
+              <button type="submit">Serach</button>
+            </form>
+          </div>
+        </div>
+
         <div className="news-gallery-container">
           {data?.pages.map((page) =>
             page.articles?.map((article, index) => (
@@ -72,7 +104,7 @@ const AllNews = () => {
                       src={article.urlToImage || placeholder}
                       alt={article.title || "News image"}
                       onError={(e) => {
-                        e.target.src = { placeholder }; // Fallback image
+                        e.target.src = placeholder; // Fallback image
                       }}
                     />
                   </div>
@@ -83,13 +115,17 @@ const AllNews = () => {
                   </div>
                   <div className="card-body">
                     <p className="description">
-                      {handleTextLimit(article.description, 100)}
+                      {handleTextLimit(article.description, 100) ||
+                        "Description not available"}
                     </p>
                   </div>
                   <div className="card-footer">
                     <div className="author">
-                      <i class="bi bi-person-fill"></i>
-                      <p>{article.author || "Unknown Author"}</p>
+                      <i className="bi bi-person-fill"></i>
+                      <p>
+                        {handleTextLimit(article.author, 25) ||
+                          "Unknown Author"}
+                      </p>
                     </div>
                     <Link
                       to={article.url}
