@@ -53,64 +53,6 @@ nav .navbar-nav li:hover a {
   color: #bfff00;
 }
 
-/* Navbar dropdown*/
-nav .dropdown-menu li {
-  position: relative;
-}
-
-nav .dropdown-menu a i {
-  display: inline-block;
-}
-
-nav .dropdown-menu a i {
-  transition: transform 0.3s ease;
-}
-
-nav .dropdown-menu a:hover i {
-  transform: rotate(180deg);
-}
-
-nav .dropdown-menu .dropdown-menu-items {
-  background-color: rgb(121, 150, 157);
-  width: 150px;
-  height: fit-content;
-  border-radius: 8px;
-  position: absolute;
-  top: 55px;
-  right: 20px;
-  padding: 5px 0;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  z-index: 1000;
-}
-
-nav .navbar-nav li:hover .dropdown-menu-items {
-  visibility: visible;
-  opacity: 1;
-}
-
-nav .dropdown-menu .dropdown-menu-items li {
-  font-size: 15px;
-  font-weight: normal;
-  padding: 3px 5px;
-}
-nav .dropdown-menu .dropdown-menu-items li a {
-  transition: 0.3s ease;
-  display: inline-block;
-  width: 100%;
-  padding: 5px 8px;
-  color: #fff;
-}
-nav .dropdown-menu .dropdown-menu-items li a:hover {
-  color: #bfff00;
-}
-
-nav .dropdown-menu .dropdown-menu-items li:hover a {
-  font-size: 15px;
-  font-weight: bold;
-}
-
 /*Serach*/
 
 input {
@@ -144,7 +86,7 @@ label {
   font-weight: bold;
 }
 select {
-  width: 50px;
+  width: 120px;
   height: 25px;
   background-color: #fff;
   border: 1px solid #ccc;

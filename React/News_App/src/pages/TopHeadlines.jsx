@@ -4,18 +4,26 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import placeholder from "../asset/images/placeholder.jpg";
 
-const fetchAllNews = async () => {
+const fetchAllNews = async ({ queryKey }) => {
   const apiKey = import.meta.env.VITE_API_KEY;
+  const country = queryKey[1];
+  const category = queryKey[2];
   const baseUrl = `${
     import.meta.env.VITE_API_URL
-  }top-headlines?country=us&apiKey=${apiKey}`;
+  }top-headlines?category=${category}&country=${country}&apiKey=${apiKey}`;
 
   if (!apiKey) {
     throw new Error("API Credential is missing");
   }
 
-  const response = await axios.get(baseUrl);
-  return response.data;
+  try {
+    const response = await axios.get(baseUrl);
+    return response.data;
+  } catch (error) {
+    const message =
+      error.response?.data?.message || error.message || "Failed to fetch news";
+    throw new Error(message);
+  }
 };
 
 const handleTextLimit = (text, limit) => {
@@ -24,17 +32,24 @@ const handleTextLimit = (text, limit) => {
 
 const TopHeadlines = () => {
   const [selectedCountry, setSelectedCountry] = useState("us");
+  const [selectedCategory, setSelectedCategory] = useState("general");
 
-  const handleChange = (event) => {
+  const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   const { data, isLoading, isError, error, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["articles"],
+      queryKey: ["articles", selectedCountry, selectedCategory],
       queryFn: fetchAllNews,
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 10,
       getNextPageParam: (lastPage, allPages) => {
-        return lastPage.articles.length ? allPages.length + 1 : undefined;
+        return lastPage.articles.length ? allPages.length + 1 : false;
       },
     });
 
@@ -53,7 +68,7 @@ const TopHeadlines = () => {
     [isLoading, hasNextPage, fetchNextPage]
   );
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return <p>Please wait, data is loading...</p>;
   }
 
@@ -66,7 +81,24 @@ const TopHeadlines = () => {
       <div className="container">
         <div className="container-header">
           <div>
-            <h3>Result for "Top Headlines"</h3>
+            <h3>Result for "Top Headlines - {selectedCategory}"</h3>
+          </div>
+          <div>
+            <label htmlFor="category">Category</label>
+            <select
+              name="category"
+              id="category"
+              onChange={handleCategoryChange}
+              value={selectedCategory}
+            >
+              <option value="general">General</option>
+              <option value="business">Business</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="health">Health</option>
+              <option value="science">Science</option>
+              <option value="sports">Sports</option>
+              <option value="technology">Technology</option>
+            </select>
           </div>
           <div>
             <form>
@@ -74,10 +106,15 @@ const TopHeadlines = () => {
               <select
                 name="country"
                 id="country"
-                onChange={handleChange}
+                onChange={handleCountryChange}
                 value={selectedCountry}
               >
                 <option value="us">US</option>
+                <option value="ca">Canada</option>
+                <option value="gb">UK</option>
+                <option value="fr">France</option>
+                <option value="de">Germany</option>
+                <option value="in">India</option>
               </select>
             </form>
           </div>
@@ -97,7 +134,7 @@ const TopHeadlines = () => {
                       src={article.urlToImage || placeholder}
                       alt={article.title || "News image"}
                       onError={(e) => {
-                        e.target.src = placeholder; // Fallback image
+                        e.target.src = placeholder;
                       }}
                     />
                   </div>
@@ -134,6 +171,9 @@ const TopHeadlines = () => {
           )}
         </div>
         {isLoading && <p>Loading more...</p>}
+        {!hasNextPage && !isLoading && data?.pages?.length && (
+          <p>No more articles to load</p>
+        )}
       </div>
     </>
   );

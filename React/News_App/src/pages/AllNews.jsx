@@ -1,8 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import React, { useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import placeholder from "../asset/images/placeholder.jpg";
+import { debounce } from "lodash";
 
 const fetchAllNews = async ({ pageParam = 1, queryKey }) => {
   const [, endpoint] = queryKey;
@@ -25,15 +26,26 @@ const handleTextLimit = (text, limit) => {
 
 const AllNews = () => {
   const [endpoint, setEndpoint] = useState("bitcoin");
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState("");
 
-  const toggleEndpoint = (inputValue) => {
-    setEndpoint(inputValue.trim() || "bitcoin");
-  };
+  // Debounced search function
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      setEndpoint(value.trim() || "bitcoin");
+    }, 500),
+    []
+  );
+
+  // Effect to trigger debounced search on input change
+  useEffect(() => {
+    if (inputValue) {
+      debouncedSearch(inputValue);
+    }
+  }, [inputValue, debouncedSearch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toggleEndpoint(inputValue);
+    setEndpoint(inputValue.trim() || "bitcoin");
   };
 
   const { data, isLoading, isError, error, fetchNextPage, hasNextPage } =
@@ -60,7 +72,7 @@ const AllNews = () => {
     [isLoading, hasNextPage, fetchNextPage]
   );
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return <p>Please wait, data is loading...</p>;
   }
 
@@ -69,80 +81,81 @@ const AllNews = () => {
   }
 
   return (
-    <>
-      <div className="container">
-        <div className="container-header">
-          <div>
-            <h3>Result for "{endpoint}"</h3>
-          </div>
-          <div>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="search"
-                id="search"
-                name="search"
-                placeholder="Serach news"
-                onChange={(e) => setInputValue(e.target.value)}
-                value={inputValue}
-              />
-              <button type="submit">Serach</button>
-            </form>
-          </div>
+    <div className="container">
+      <div className="container-header">
+        <div>
+          <h3>Result for "{endpoint}"</h3>
         </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="search"
+              id="search"
+              name="search"
+              placeholder="Search news"
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+            />
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </div>
 
-        <div className="news-gallery-container">
-          {data?.pages.map((page) =>
-            page.articles?.map((article, index) => (
-              <div
-                key={article.source?.id || article.title || index}
-                className="gallery-item"
-                ref={index === page.articles.length - 1 ? lastElementRef : null}
-              >
-                <div className="card">
-                  <div className="card-img">
-                    <img
-                      src={article.urlToImage || placeholder}
-                      alt={article.title || "News image"}
-                      onError={(e) => {
-                        e.target.src = placeholder; // Fallback image
-                      }}
-                    />
-                  </div>
-                  <div className="card-header">
-                    <h3 title={article.title}>
-                      {handleTextLimit(article.title, 50)}
-                    </h3>
-                  </div>
-                  <div className="card-body">
-                    <p className="description">
-                      {handleTextLimit(article.description, 100) ||
-                        "Description not available"}
+      <div className="news-gallery-container">
+        {data?.pages.map((page) =>
+          page.articles?.map((article, index) => (
+            <div
+              key={article.source?.id || article.title || index}
+              className="gallery-item"
+              ref={index === page.articles.length - 1 ? lastElementRef : null}
+            >
+              <div className="card">
+                <div className="card-img">
+                  <img
+                    src={article.urlToImage || placeholder}
+                    alt={article.title || "News image"}
+                    onError={(e) => {
+                      e.target.src = placeholder; // Fallback image
+                    }}
+                  />
+                </div>
+                <div className="card-header">
+                  <h3 title={article.title}>
+                    {handleTextLimit(article.title, 50)}
+                  </h3>
+                </div>
+                <div className="card-body">
+                  <p className="description">
+                    {handleTextLimit(article.description, 100) ||
+                      "Description not available"}
+                  </p>
+                </div>
+                <div className="card-footer">
+                  <div className="author">
+                    <i className="bi bi-person-fill"></i>
+                    <p>
+                      {handleTextLimit(article.author, 25) || "Unknown Author"}
                     </p>
                   </div>
-                  <div className="card-footer">
-                    <div className="author">
-                      <i className="bi bi-person-fill"></i>
-                      <p>
-                        {handleTextLimit(article.author, 25) ||
-                          "Unknown Author"}
-                      </p>
-                    </div>
-                    <Link
-                      to={article.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button>Read more</button>
-                    </Link>
-                  </div>
+                  <Link
+                    to={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button>Read more</button>
+                  </Link>
                 </div>
               </div>
-            ))
-          )}
-        </div>
-        {isLoading && <p>Loading more...</p>}
+            </div>
+          ))
+        )}
       </div>
-    </>
+
+      {isLoading && <p>Loading more...</p>}
+      {!hasNextPage && !isLoading && data?.pages?.length && (
+        <p>No more articles to load</p>
+      )}
+    </div>
   );
 };
 
