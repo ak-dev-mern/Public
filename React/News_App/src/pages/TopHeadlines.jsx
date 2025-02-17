@@ -3,6 +3,7 @@ import React, { useRef, useCallback, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import placeholder from "../asset/images/placeholder.jpg";
+import Spinner from "../components/Spinner";
 
 const fetchAllNews = async ({ queryKey }) => {
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -68,7 +69,11 @@ const TopHeadlines = () => {
   );
 
   if (isLoading && !data) {
-    return <p className="no-data-found">Please wait, data is loading...</p>;
+    return (
+      <p className="no-data-found">
+        <Spinner />
+      </p>
+    );
   }
 
   if (isError) {
@@ -168,7 +173,12 @@ const TopHeadlines = () => {
             ))
           )}
         </div>
-        {isLoading && <p>Loading more...</p>}
+        {isLoading &&
+          hasNextPage(
+            <p>
+              <Spinner />
+            </p>
+          )}
         {!hasNextPage && !isLoading && data?.pages?.length && (
           <p>No more articles to load</p>
         )}

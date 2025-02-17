@@ -3,6 +3,7 @@ import React, { useRef, useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import placeholder from "../asset/images/placeholder.jpg";
+import Spinner from "../components/Spinner";
 
 const fetchAllNews = async ({ pageParam = 1, queryKey }) => {
   const [, endpoint] = queryKey;
@@ -61,7 +62,11 @@ const AllNews = () => {
   );
 
   if (isLoading && !data) {
-    return <p className="no-data-found">Please wait, data is loading...</p>;
+    return (
+      <p className="no-data-found">
+        <Spinner />
+      </p>
+    );
   }
 
   if (isError) {
@@ -69,81 +74,88 @@ const AllNews = () => {
   }
 
   return (
-    <div className="container">
-      <div className="container-header">
-        <div>
-          <h3>Result for "{endpoint}"</h3>
+    <>
+      <div className="container">
+        <div className="container-header">
+          <div>
+            <h3>Result for "{endpoint}"</h3>
+          </div>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="search"
+                id="search"
+                name="search"
+                placeholder="Search news"
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+                autoComplete="off"
+              />
+              <button type="submit">Search</button>
+            </form>
+          </div>
         </div>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="search"
-              id="search"
-              name="search"
-              placeholder="Search news"
-              onChange={(e) => setInputValue(e.target.value)}
-              value={inputValue}
-              autoComplete="off"
-            />
-            <button type="submit">Search</button>
-          </form>
-        </div>
-      </div>
 
-      <div className="news-gallery-container">
-        {data?.pages.map((page) =>
-          page.articles?.map((article, index) => (
-            <div
-              key={article.source?.id || article.title || index}
-              className="gallery-item"
-              ref={index === page.articles.length - 1 ? lastElementRef : null}
-            >
-              <div className="card">
-                <div className="card-img">
-                  <img
-                    src={article.urlToImage || placeholder}
-                    alt={article.title || "News image"}
-                    onError={(e) => {
-                      e.target.src = placeholder; // Fallback image
-                    }}
-                  />
-                </div>
-                <div className="card-header">
-                  <h3 title={article.title}>
-                    {handleTextLimit(article.title, 50)}
-                  </h3>
-                </div>
-                <div className="card-body">
-                  <p className="description">
-                    {handleTextLimit(article.description, 100) ||
-                      "Description not available"}
-                  </p>
-                </div>
-                <div className="card-footer">
-                  <div className="author">
-                    <i className="bi bi-person-fill"></i>
-                    <p>
-                      {handleTextLimit(article.author, 25) || "Unknown Author"}
+        <div className="news-gallery-container">
+          {data?.pages.map((page) =>
+            page.articles?.map((article, index) => (
+              <div
+                key={article.source?.id || article.title || index}
+                className="gallery-item"
+                ref={index === page.articles.length - 1 ? lastElementRef : null}
+              >
+                <div className="card">
+                  <div className="card-img">
+                    <img
+                      src={article.urlToImage || placeholder}
+                      alt={article.title || "News image"}
+                      onError={(e) => {
+                        e.target.src = placeholder; // Fallback image
+                      }}
+                    />
+                  </div>
+                  <div className="card-header">
+                    <h3 title={article.title}>
+                      {handleTextLimit(article.title, 50)}
+                    </h3>
+                  </div>
+                  <div className="card-body">
+                    <p className="description">
+                      {handleTextLimit(article.description, 100) ||
+                        "Description not available"}
                     </p>
                   </div>
-                  <Link
-                    to={`/newsdetails/${article.source?.id || article.title}`}
-                    rel="noopener noreferrer"
-                  >
-                    <button>Read more</button>
-                  </Link>
+                  <div className="card-footer">
+                    <div className="author">
+                      <i className="bi bi-person-fill"></i>
+                      <p>
+                        {handleTextLimit(article.author, 25) ||
+                          "Unknown Author"}
+                      </p>
+                    </div>
+                    <Link
+                      to={`/newsdetails/${article.source?.id || article.title}`}
+                      rel="noopener noreferrer"
+                    >
+                      <button>Read more</button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))
+          )}
+        </div>
+
+        {isLoading && (
+          <p>
+            <Spinner />
+          </p>
+        )}
+        {!hasNextPage && !isLoading && data?.pages?.length && (
+          <p>No more articles to load</p>
         )}
       </div>
-
-      {isLoading && <p>Loading more...</p>}
-      {!hasNextPage && !isLoading && data?.pages?.length && (
-        <p>No more articles to load</p>
-      )}
-    </div>
+    </>
   );
 };
 
