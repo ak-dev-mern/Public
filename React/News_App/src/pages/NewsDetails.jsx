@@ -30,7 +30,7 @@ const NewsDetails = () => {
     };
 
     fetchArticleDetails();
-  }, [id]); // Re-fetch if ID changes
+  }, [id]); 
 
   if (loading)
     return <p className="no-data-found">Loading article details...</p>;
